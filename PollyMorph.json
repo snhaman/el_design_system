@@ -2,9 +2,22 @@
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "meta": {
     "name": "PollyMorph",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Elucidata unified design system token file. Consolidates all core primitives and semantic component tokens.",
-    "generatedAt": "2026-03-18"
+    "generatedAt": "2026-03-18",
+    "lastAudit": "2026-03-18",
+    "auditSource": "Figma PDS-2.0-Library (efOu8CmzqQ3zegLcfdQh9P)",
+    "openConflicts": [
+      "CONFLICT-1: core.color.platform.sidebar.stroke — PollyMorph:#373051 vs Figma:#433B60. See CONFLICTS.md.",
+      "CONFLICT-2: core.color.platform.surfaces — PollyMorph:#A78FF7 vs Figma:#FFFFFF. See CONFLICTS.md.",
+      "CONFLICT-3: core.font.letter.spacing.widest (0.5px) added for Body/Large — confirm this is intentional.",
+      "CONFLICT-4: core.font.weight.thick (550) added from Figma Subject/Small — confirm or remap to 500/600."
+    ],
+    "colorScaleSystem": {
+      "description": "Each primary and secondary colour has a full tint/shade scale in Figma. Positive step numbers (10–98) mix the base colour with white. Negative step numbers (-10 to -80) mix with black. Step 0 is the pure base colour. Example: Purple/80 = base purple at 80% opacity over white.",
+      "steps": [98, 95, 92, 90, 85, 80, 75, 70, 60, 50, 40, 30, 20, 10, 0, -10, -20, -30, -40, -50, -60, -80],
+      "note": "Full computed hex ramp not yet tokenised. Resolve open conflicts first, then run a dedicated colour ramp pass."
+    }
   },
   "core": {
     "color": {
@@ -42,14 +55,17 @@
         }
       },
       "platform": {
+        "_conflict": "CONFLICT-2: surfaces value #A78FF7 (PollyMorph) vs #FFFFFF (Figma Surfaces/Platform). Resolve before using.",
         "surfaces": "#A78FF7",
         "sidebar": {
-          "surfaces": "#211d33",
-          "stroke": "#373051"
+          "surfaces": "#211D33",
+          "_strokeConflict": "CONFLICT-1: stroke value #373051 (PollyMorph) vs #433B60 (Figma Surfaces/Sidebar Stroke). Resolve before using.",
+          "stroke": "#373051",
+          "secondarySurfaces": "#2C2840"
         }
       },
       "standard": {
-        "white": "#ffffff",
+        "white": "#FFFFFF",
         "black": "#000000"
       },
       "surface": {
@@ -70,6 +86,7 @@
         "grotesk": "'Space Grotesk', sans-serif",
         "inter": "'Inter', sans-serif",
         "jetbrains": "'JetBrains Mono', monospace",
+        "icon": "'PDS-Icon-Font-20', sans-serif",
         "base": "'Inter', sans-serif"
       },
       "size": {
@@ -112,14 +129,35 @@
           "medium": "0.75rem",
           "small": "0.6875rem",
           "micro": "0.625rem"
+        },
+        "slate": {
+          "_note": "Space Grotesk VW headline-alternative scale. Added from Figma PDS 2.0.",
+          "large": "2rem",
+          "medium": "1.75rem",
+          "small": "1.5rem"
+        },
+        "subject": {
+          "_note": "Space Grotesk VW title-alternative scale. Added from Figma PDS 2.0.",
+          "large": "1.375rem",
+          "medium": "1rem",
+          "small": "0.875rem",
+          "micro": "0.75rem"
+        },
+        "icon": {
+          "_note": "PDS-Icon-Font-20 icon scale. Added from Figma PDS 2.0.",
+          "large": "1.5rem",
+          "medium": "1.25rem",
+          "small": "1rem"
         }
       },
       "weight": {
         "normal": "400",
         "extraThick": "450",
         "medium": "500",
+        "thick": "550",
         "semiBold": "600",
-        "bold": "700"
+        "bold": "700",
+        "_thickNote": "CONFLICT-4: weight 550 added from Figma Subject/Small. Confirm it is intentional or remap to 500/600."
       },
       "height": {
         "display": {
@@ -161,6 +199,22 @@
           "medium": "1rem",
           "small": "1rem",
           "micro": "0.875rem"
+        },
+        "slate": {
+          "large": "2.5rem",
+          "medium": "2.25rem",
+          "small": "2rem"
+        },
+        "subject": {
+          "large": "1.75rem",
+          "medium": "1.5rem",
+          "small": "1.25rem",
+          "micro": "1rem"
+        },
+        "icon": {
+          "large": "1.4375rem",
+          "medium": "1.25rem",
+          "small": "1rem"
         }
       },
       "letter": {
@@ -169,7 +223,11 @@
           "tight": "-0.1px",
           "normal": "0.1px",
           "wide": "0.2px",
-          "wider": "0.35px"
+          "wider": "0.35px",
+          "subtleWide": "0.15px",
+          "semiWide": "0.3px",
+          "widest": "0.5px",
+          "_widestNote": "CONFLICT-3: 0.5px used by Figma Body/Large. Confirm intentional — previously had no step above 0.35px."
         }
       }
     },
