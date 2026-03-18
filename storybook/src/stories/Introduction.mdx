@@ -1,0 +1,44 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Introduction" />
+
+# PollyMorph Design System
+
+**Version 1.6.0** · Elucidata / Polly
+
+---
+
+PollyMorph is the single source of truth for every visual decision in the Polly platform.
+It ships as an NPM package (`@snhaman/pollymorph`) containing tokens, component rules, icons, and React components.
+
+## What's here
+
+This Storybook documents every component that appears in `rules.components` of `PollyMorph.json`.
+Components are implemented on top of shadcn/ui primitives, styled with PollyMorph CSS custom properties.
+
+| Layer | What it contains |
+|-------|-----------------|
+| **Foundations** | Color system, typography, spacing, elevation, icons |
+| **Components** | 15 component types with all states and variants |
+
+## Install the package
+
+```bash
+npm install @snhaman/pollymorph
+```
+
+## Use tokens in your app
+
+```ts
+import "@snhaman/pollymorph/css"; // injects all CSS custom properties
+
+// Then use anywhere:
+// background: var(--color-primary-purple)
+// font-family: var(--font-family-inter)
+// border-radius: var(--radius-md)
+```
+
+## Links
+
+- [GitHub — PollyMorph](https://github.com/snhaman/PollyMorph)
+- [NPM — @snhaman/pollymorph](https://www.npmjs.com/package/@snhaman/pollymorph)
