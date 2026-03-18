@@ -1,7 +1,7 @@
 {
   "name": "@snhaman/pollymorph",
-  "version": "1.5.0",
-  "description": "Elucidata unified design system — tokens, rules, types, CSS variables, and icons",
+  "version": "1.6.0",
+  "description": "Elucidata unified design system — tokens, rules, component specs, types, CSS variables, and icons",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",

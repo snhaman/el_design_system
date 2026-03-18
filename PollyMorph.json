@@ -2,7 +2,7 @@
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "meta": {
     "name": "PollyMorph",
-    "version": "1.4.0",
+    "version": "1.6.0",
     "description": "Elucidata unified design system token file. Consolidates all core primitives and semantic component tokens.",
     "generatedAt": "2026-03-18",
     "lastAudit": "2026-03-18",
@@ -10,7 +10,7 @@
     "rulesSource": "Figma design-system-usage-rules-context (2u2sJOu3KyQ4rzyEPo9D4S)",
     "openConflicts": [],
     "colorScaleSystem": {
-      "description": "Each primary and secondary colour has a full tint/shade scale in Figma. Positive step numbers (10\u201398) mix the base colour with white. Negative step numbers (-10 to -80) mix with black. Step 0 is the pure base colour. Example: Purple/80 = base purple at 80% opacity over white.",
+      "description": "Each primary and secondary colour has a full tint/shade scale in Figma. Positive step numbers (10–98) mix the base colour with white. Negative step numbers (-10 to -80) mix with black. Step 0 is the pure base colour. Example: Purple/80 = base purple at 80% opacity over white.",
       "steps": [
         98,
         95,
@@ -36,7 +36,8 @@
         -80
       ],
       "note": "Full computed hex ramp tokenised in v1.3.0. Each colour has a 'base' key (pure colour) plus 22 tint/shade steps."
-    }
+    },
+    "componentRulesSource": "Figma PDS-2.0-Library nodes: 850-601,602,603,605,1026-2068,7763-5244/5245,1916-4113,4718-1770,6228-7796/7063,280-59,447-188,452-304,230-280,289-101,448-191"
   },
   "core": {
     "color": {
@@ -579,7 +580,7 @@
       },
       "platform": {
         "surfaces": {
-          "_note": "Platform background is a gradient, not a flat colour. Direction defaults to 180deg (top-to-bottom) \u2014 adjust per context.",
+          "_note": "Platform background is a gradient, not a flat colour. Direction defaults to 180deg (top-to-bottom) — adjust per context.",
           "gradient": {
             "stops": [
               {
@@ -1302,16 +1303,562 @@
       "search_bar_placement": "Search bars inside the global header are centered and fill available space between the nav title and action buttons. They never span the full content width."
     },
     "components": {
-      "buttons": {
-        "primary": "One primary button per screen. Use for the main action only.",
-        "secondary": "Secondary actions (e.g. 'Request a Dataset') use the Secondary/Outlined variant with a purple border. Never use a filled secondary color.",
-        "icon_button": "Icon-only action buttons (filter, view toggle, etc.) use the icon button variant with no visible border in default state."
+      "$description": "Component-level rules derived from PDS-2.0-Library Figma specs. Each entry covers variants, states, token values, and composition constraints.",
+      "button": {
+        "variants": {
+          "filled": {
+            "description": "Primary action. One per view maximum.",
+            "background": "primary.purple.base",
+            "text": "white",
+            "border": "none",
+            "radius": "radius.md",
+            "elevation": "none",
+            "hover": {
+              "background": "primary.purple[-10]"
+            },
+            "active": {
+              "background": "primary.purple[-20]"
+            },
+            "disabled": {
+              "background": "primary.purple[80]",
+              "text": "white",
+              "cursor": "not-allowed"
+            },
+            "loading": "Spinner replaces label. Width preserved. No interaction."
+          },
+          "outlined": {
+            "description": "Secondary action. Can appear alongside ghost.",
+            "background": "transparent",
+            "border": "1px solid primary.purple.base",
+            "text": "primary.purple.base",
+            "radius": "radius.md",
+            "hover": {
+              "background": "primary.purple[95]"
+            },
+            "active": {
+              "background": "primary.purple[90]"
+            },
+            "disabled": {
+              "border": "primary.purple[80]",
+              "text": "primary.purple[80]",
+              "cursor": "not-allowed"
+            }
+          },
+          "ghost": {
+            "description": "Tertiary action. No border, no background.",
+            "background": "transparent",
+            "border": "none",
+            "text": "primary.purple.base",
+            "radius": "radius.md",
+            "hover": {
+              "background": "primary.purple[95]"
+            },
+            "active": {
+              "background": "primary.purple[90]"
+            },
+            "disabled": {
+              "text": "neutral.warm[60]",
+              "cursor": "not-allowed"
+            }
+          }
+        },
+        "sizes": {
+          "large": {
+            "height": "40px",
+            "paddingX": "spacing.4",
+            "fontSize": "font.size.md",
+            "iconGap": "spacing.2"
+          },
+          "medium": {
+            "height": "32px",
+            "paddingX": "spacing.3",
+            "fontSize": "font.size.sm",
+            "iconGap": "spacing.2"
+          },
+          "small": {
+            "height": "24px",
+            "paddingX": "spacing.2",
+            "fontSize": "font.size.xs",
+            "iconGap": "spacing.1"
+          },
+          "xsmall": {
+            "height": "20px",
+            "paddingX": "spacing.2",
+            "fontSize": "font.size.xxs",
+            "iconGap": "spacing.1"
+          }
+        },
+        "iconPlacement": "Leading icon left of label, trailing icon right of label. Icon-only: square aspect ratio, tooltip required.",
+        "font": "Inter SemiBold (600). No uppercase transform.",
+        "radius": "radius.md (6px). Never radius.full for buttons.",
+        "composition": "Never stack two Filled buttons side by side. Destructive action uses red Filled variant only in modal footers."
       },
-      "tabs": "Tabs use a bottom-border indicator in #8E42EE for the active state. Inactive tabs have no underline and use neutral text. Filled or pill-style tabs are not permitted in the main nav context.",
-      "table_sort": "Sort controls in table headers show the sort icon alongside the label at all times — not only on hover.",
-      "pagination": "Pagination uses the minimal numeric style with previous/next arrows. Always display the total dataset count alongside (e.g. 'Showing 1–25 of 345').",
-      "sidebar_active_state": "Active sidebar nav item is indicated by a left-side purple pill/accent bar only. No background fill, icon color change, or text weight change. This is the only permitted active state pattern for sidebar nav.",
-      "notification_badges": "Notification badges on sidebar icons use the red semantic color token. Small, circular, positioned top-right of the icon."
+      "tag": {
+        "variants": {
+          "filled": "Background: color[90] tint. Text and icon: color.base.",
+          "outlined": "Background: transparent. Border: 1px solid color.base. Text: color.base."
+        },
+        "colors": {
+          "brand": "primary.purple.base filled, white text. Only for Polly/Elucidata-attributed labels.",
+          "content": "cyan, pink, blue, green, orange for data category tags.",
+          "statusReserved": "red and yellow reserved for status only. Never use for data category tags."
+        },
+        "sizes": {
+          "medium": {
+            "height": "24px",
+            "paddingX": "spacing.2",
+            "fontSize": "font.size.xs"
+          },
+          "small": {
+            "height": "20px",
+            "paddingX": "spacing.1",
+            "fontSize": "font.size.xxs"
+          }
+        },
+        "font": "Inter Medium (500). Never bold inside a tag.",
+        "radius": "radius.full (pill shape).",
+        "closeable": "x icon on right, same color as label. Click removes tag.",
+        "truncation": "Tags never wrap. Truncate with ellipsis. Set max-width on parent.",
+        "icon": "Optional leading icon, same color as label."
+      },
+      "textInput": {
+        "states": {
+          "default": {
+            "border": "1px solid neutral.warm[70]",
+            "background": "white",
+            "placeholder": "neutral.warm[50]"
+          },
+          "focused": {
+            "border": "1px solid primary.purple.base",
+            "shadow": "none",
+            "outline": "none"
+          },
+          "filled": {
+            "border": "1px solid neutral.warm[70]"
+          },
+          "error": {
+            "border": "1px solid red.base",
+            "trailingIcon": "warning icon in red.base",
+            "helperText": "red.base, font.size.xs"
+          },
+          "disabled": {
+            "background": "neutral.warm[95]",
+            "border": "neutral.warm[85]",
+            "text": "neutral.warm[60]",
+            "cursor": "not-allowed"
+          }
+        },
+        "radius": "radius.sm",
+        "label": "Always above the field. Inter Medium (500), font.size.sm. Never inside field as permanent placeholder.",
+        "helperText": "Below field, neutral.warm[50], font.size.xs. Replaced by error message in error state.",
+        "leadingIcon": "Optional. neutral.warm[50] default, primary.purple.base when focused.",
+        "trailingIcon": "Password toggle, clear (x), or error indicator.",
+        "textarea": "Same border/state rules. Min-height 3 rows. Vertical resize only.",
+        "search": "Always has leading search icon. Trailing clear (x) when filled. No floating label.",
+        "select": {
+          "trailingIcon": "Chevron, rotates 180 degrees when open",
+          "menu": {
+            "background": "white",
+            "radius": "radius.md",
+            "elevation": "elevation.md"
+          }
+        }
+      },
+      "selectionControl": {
+        "radio": {
+          "size": "18px",
+          "states": {
+            "default": {
+              "border": "1.5px solid neutral.warm[70]"
+            },
+            "hover": {
+              "border": "1.5px solid primary.purple.base"
+            },
+            "checked": {
+              "outerRing": "primary.purple.base",
+              "innerDot": "primary.purple.base"
+            },
+            "disabled": {
+              "border": "neutral.warm[80]",
+              "dot": "neutral.warm[70]",
+              "cursor": "not-allowed"
+            }
+          }
+        },
+        "checkbox": {
+          "size": "18px",
+          "radius": "radius.xs",
+          "states": {
+            "default": {
+              "border": "1.5px solid neutral.warm[70]"
+            },
+            "hover": {
+              "border": "1.5px solid primary.purple.base"
+            },
+            "checked": {
+              "background": "primary.purple.base",
+              "icon": "white checkmark"
+            },
+            "indeterminate": {
+              "background": "primary.purple.base",
+              "icon": "white dash"
+            },
+            "disabled": {
+              "background": "neutral.warm[90]",
+              "border": "neutral.warm[80]",
+              "cursor": "not-allowed"
+            },
+            "error": {
+              "border": "red.base"
+            }
+          }
+        },
+        "label": "Right of control. Inter Regular (400), font.size.sm. Never above or below.",
+        "groupSpacing": {
+          "vertical": "spacing.2 between items",
+          "horizontal": "spacing.4 gap"
+        }
+      },
+      "table": {
+        "container": {
+          "background": "white",
+          "radius": "radius.xl",
+          "elevation": "elevation.md"
+        },
+        "header": {
+          "background": "neutral.warm[97]",
+          "font": "Label/Small SemiBold (600)",
+          "color": "neutral.warm[50]",
+          "sortIcon": "Always visible. Active column: primary.purple.base"
+        },
+        "rows": {
+          "default": {
+            "background": "white",
+            "border": "1px solid neutral.warm[90] bottom"
+          },
+          "hover": {
+            "background": "primary.purple[98]"
+          },
+          "selected": {
+            "background": "primary.purple[95]",
+            "leftAccent": "3px solid primary.purple.base"
+          }
+        },
+        "cellTypes": {
+          "text": "Left-aligned. Inter Regular (400), font.size.sm, neutral.warm[20].",
+          "number": "Right-aligned. JetBrains Mono.",
+          "status": "Centered. Tag component.",
+          "actions": "Right-aligned. Icon buttons, visible on row hover. Max 3 — overflow to meatball menu."
+        },
+        "sort": "Click cycles: ascending to descending to unsorted.",
+        "emptyState": "Centered illustration + headline + optional CTA. Never headers-only without empty state component.",
+        "pagination": {
+          "rowsPerPage": [
+            10,
+            25,
+            50,
+            100
+          ],
+          "display": "Showing {start}-{end} of {total}",
+          "controls": "Prev/next arrows + page numbers"
+        }
+      },
+      "tabs": {
+        "containerBorder": "1px solid neutral.warm[85] bottom",
+        "indicator": "2px solid primary.purple.base bottom, active tab only",
+        "states": {
+          "active": {
+            "label": "primary.purple.base",
+            "font": "Inter SemiBold (600)"
+          },
+          "default": {
+            "label": "neutral.warm[40]",
+            "font": "Inter Medium (500)"
+          },
+          "hover": {
+            "label": "neutral.warm[20]"
+          },
+          "disabled": {
+            "label": "neutral.warm[70]",
+            "cursor": "not-allowed"
+          }
+        },
+        "badge": {
+          "default": {
+            "background": "neutral.warm[80]",
+            "text": "neutral.warm[30]"
+          },
+          "active": {
+            "background": "primary.purple[90]",
+            "text": "primary.purple.base"
+          }
+        },
+        "maxVisible": "6 tabs before dropdown overflow. No horizontal scroll.",
+        "style": "Indicator line only. Never filled/pill background tabs in main nav context."
+      },
+      "sidebarNav": {
+        "background": "platform.sidebar.surfaces (#211D33)",
+        "item": {
+          "default": {
+            "icon": "white",
+            "label": "neutral.warm[70]",
+            "padding": "spacing.3 vertical"
+          },
+          "hover": {
+            "background": "rgba(255,255,255,0.06)",
+            "radius": "radius.sm"
+          },
+          "active": {
+            "leftAccent": "3px solid primary.purple[60]",
+            "label": "white",
+            "icon": "primary.purple[60]"
+          }
+        },
+        "divider": "1px solid platform.sidebar.stroke (#433B60)",
+        "iconSize": "20px. Always use PDS-Icon-Font-20 or SVG. Never emoji or text characters.",
+        "notificationBadge": {
+          "background": "red.base",
+          "text": "white",
+          "position": "top-right of icon",
+          "maxDisplay": "99+"
+        },
+        "collapseBehavior": "Never collapses to icon-only on desktop. Mobile: drawer/overlay."
+      },
+      "breadcrumb": {
+        "separator": "/ or > in neutral.warm[60], spacing.2 each side",
+        "crumbs": {
+          "nonCurrent": {
+            "color": "primary.purple.base",
+            "hoverDecoration": "underline"
+          },
+          "current": {
+            "color": "neutral.warm[30]",
+            "interactive": "false"
+          }
+        },
+        "font": "Inter Regular (400), font.size.sm",
+        "maxDepth": "4 levels. Collapse middle levels to ellipsis if deeper."
+      },
+      "modal": {
+        "overlay": "rgba(0,0,0,0.4) full-screen",
+        "container": {
+          "background": "white",
+          "radius": "radius.xl",
+          "elevation": "elevation.lg",
+          "border": "1px solid neutral.warm[85]"
+        },
+        "sizes": {
+          "popup": {
+            "maxWidth": "480px",
+            "scrollable": "false",
+            "use": "Confirmations, quick forms"
+          },
+          "modal": {
+            "maxWidth": "720px",
+            "maxHeight": "80vh",
+            "bodyScrollable": "true",
+            "use": "Complex forms, data views"
+          }
+        },
+        "header": {
+          "background": "primary.purple[98]",
+          "padding": "spacing.4 spacing.5",
+          "title": "Inter SemiBold (600), font.size.md, neutral.warm[10]",
+          "closeButton": "Ghost icon button, top-right, always present"
+        },
+        "body": {
+          "background": "white",
+          "padding": "spacing.5",
+          "scrollbar": "Thin, primary.purple[60] track, visible during scroll only"
+        },
+        "footer": {
+          "padding": "spacing.4 spacing.5",
+          "border": "1px solid neutral.warm[90] top",
+          "alignment": "right",
+          "buttonPattern": "Tertiary (ghost) + Primary (filled). Destructive: red Filled.",
+          "note": "Never ghost for destructive actions."
+        },
+        "animation": "200ms fade + subtle scale on open/close",
+        "closing": "x button, overlay click (configurable), Escape key",
+        "nesting": "Never nest modals. Use multi-step flow within same modal instead."
+      },
+      "snackbar": {
+        "position": "Bottom-right. Stacks upward if multiple queued.",
+        "container": {
+          "background": "white",
+          "radius": "radius.md",
+          "elevation": "elevation.md",
+          "border": "1px solid neutral.warm[85]",
+          "width": "320px-480px"
+        },
+        "variants": {
+          "default": {
+            "icon": "none or neutral info icon"
+          },
+          "success": {
+            "icon": "green check-circle, green.base"
+          },
+          "error": {
+            "icon": "red error-circle, red.base"
+          },
+          "warning": {
+            "icon": "orange warning-triangle, orange.base"
+          }
+        },
+        "sizes": {
+          "compact": "Single line: icon + title + optional action + dismiss",
+          "expanded": "Icon + title + body text + optional action + dismiss"
+        },
+        "content": {
+          "title": "Inter SemiBold (600), font.size.sm, neutral.warm[10]. Required.",
+          "body": "Inter Regular (400), font.size.sm, neutral.warm[30]. Optional.",
+          "action": "One maximum. Right-aligned text link, primary.purple.base. Style: Open / Undo / View.",
+          "dismiss": "x ghost icon button, top-right. Always present."
+        },
+        "autoDismiss": "Default/Success: 4 seconds. Error/Warning: manual dismiss only.",
+        "background": "Always white. Never colored backgrounds — icon carries semantic meaning.",
+        "persistence": "Not for persistent messages. Use top-of-content-area banner for those."
+      },
+      "tooltip": {
+        "variants": {
+          "dark": {
+            "background": "neutral.warm[-70]",
+            "border": "none",
+            "text": "white"
+          },
+          "light": {
+            "background": "white",
+            "border": "1px solid neutral.warm[85]",
+            "text": "neutral.warm[10]"
+          }
+        },
+        "shared": {
+          "radius": "radius.sm",
+          "elevation": "elevation.sm",
+          "padding": "spacing.1 spacing.2",
+          "maxWidth": "200px",
+          "font": "Inter Regular (400), font.size.xs"
+        },
+        "arrow": "6px triangle pointing toward trigger. Matches tooltip background. 4 directions + alignment variants.",
+        "trigger": "Hover or focus. 300ms appear delay. Immediate dismiss on mouse-out.",
+        "usage": {
+          "dark": "Default for icon-only triggers (sidebar icons, action buttons).",
+          "light": "Longer descriptive text.",
+          "restriction": "Supplementary labels only. Never for critical task information. Never interactive elements inside — use hover card instead."
+        }
+      },
+      "hoverCard": {
+        "trigger": "Hover over element (table cell, username, tag). 400ms delay.",
+        "container": {
+          "background": "white",
+          "radius": "radius.lg",
+          "elevation": "elevation.md",
+          "border": "1px solid neutral.warm[85]",
+          "width": "220px-320px"
+        },
+        "header": "Title: Inter SemiBold (600), font.size.sm. Optional meatball menu icon button on right.",
+        "body": "Inter Regular (400), font.size.sm, neutral.warm[20]. Short text, key-value pairs, or small list.",
+        "footer": "None. Hover cards are read-only. Use popup for actions.",
+        "arrow": "Optional. Use when card needs visual connection to trigger in dense layouts.",
+        "dismiss": "On mouse-out (no delay) or when focus leaves."
+      },
+      "commentThread": {
+        "input": {
+          "placeholder": "Enter your comment here.",
+          "sendButton": "Icon button, primary.purple.base bg, white arrow icon, trailing. Active only when input non-empty.",
+          "sendButtonDisabled": "Muted purple when empty."
+        },
+        "postedComment": {
+          "avatar": "User initials, primary.purple.base background, white text.",
+          "header": "Display name (SemiBold) + timestamp (neutral.warm[50], font.size.xs) on one line.",
+          "body": "Inter Regular (400), font.size.sm."
+        },
+        "actions": "Thumbs-up + count, reply link. neutral.warm[50] default, primary.purple.base on hover.",
+        "nesting": "Max 2 levels. Replies: left-indent with 2px solid neutral.warm[85] left border.",
+        "highlighted": {
+          "background": "primary.purple[95]",
+          "border": "1px dashed primary.purple.base",
+          "radius": "radius.md"
+        }
+      },
+      "chartColors": {
+        "sequence": [
+          {
+            "index": 1,
+            "color": "secondary.purple (tint)",
+            "use": "First data series"
+          },
+          {
+            "index": 2,
+            "color": "orange.base",
+            "use": "Second data series"
+          },
+          {
+            "index": 3,
+            "color": "pink.base",
+            "use": "Third data series"
+          },
+          {
+            "index": 4,
+            "color": "cyan.base",
+            "use": "Fourth data series"
+          },
+          {
+            "index": 5,
+            "color": "blue.base",
+            "use": "Fifth data series"
+          },
+          {
+            "index": 6,
+            "color": "neutral.warm.base",
+            "use": "Sixth data series"
+          },
+          {
+            "index": 7,
+            "color": "green.base",
+            "use": "Seventh data series"
+          },
+          {
+            "index": 8,
+            "color": "neutral.orange",
+            "use": "Eighth data series"
+          },
+          {
+            "index": 9,
+            "color": "red.base",
+            "use": "Ninth data series"
+          }
+        ],
+        "rules": [
+          "Apply colors in sequence. Do not skip or reorder.",
+          "Each color has a chart tint (~20% lightened) and an offset variant for comparison charts.",
+          "Chart colors for data visualisation only. Never repurpose for UI status.",
+          "More than 9 series: wrap palette at 0.6x opacity. Never invent new colors.",
+          "Minimum 3:1 contrast between adjacent chart segments."
+        ]
+      },
+      "cliColors": {
+        "sqlCLI": {
+          "keywords": "secondary.purple[-20]",
+          "comments": "orange[-20]",
+          "strings": "pink[-30]",
+          "numeralsDatetime": "cyan[-20]",
+          "atoms": "blue[-20]",
+          "generic": "neutral[-40]",
+          "identifiers": "green[-30]",
+          "brackets": "neutral.orange[-20]",
+          "errorText": "red[-40]"
+        },
+        "logCLI": {
+          "background": "neutral[-70]",
+          "debug": "cyan[40]",
+          "warning": "orange[50]",
+          "error": "pink[90]",
+          "critical": "red[0]",
+          "info": "green[50]",
+          "regularText": "neutral[95]"
+        }
+      }
     },
     "spacing": {
       "card_padding": "Internal card padding uses spacing.4 (1rem) on all sides.",
