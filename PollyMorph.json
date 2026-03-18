@@ -2,11 +2,12 @@
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "meta": {
     "name": "PollyMorph",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "Elucidata unified design system token file. Consolidates all core primitives and semantic component tokens.",
     "generatedAt": "2026-03-18",
     "lastAudit": "2026-03-18",
     "auditSource": "Figma PDS-2.0-Library (efOu8CmzqQ3zegLcfdQh9P)",
+    "rulesSource": "Figma design-system-usage-rules-context (2u2sJOu3KyQ4rzyEPo9D4S)",
     "openConflicts": [],
     "colorScaleSystem": {
       "description": "Each primary and secondary colour has a full tint/shade scale in Figma. Positive step numbers (10\u201398) mix the base colour with white. Negative step numbers (-10 to -80) mix with black. Step 0 is the pure base colour. Example: Purple/80 = base purple at 80% opacity over white.",
@@ -1243,6 +1244,79 @@
           "borderactive": "1px solid {color.secondary.purple|mix:25:white}"
         }
       }
+    }
+  },
+  "rules": {
+    "$description": "Enforced design usage rules derived from Figma usage-context screens (OA Landing, BRS Table Landing). These govern how AI tools and engineers should apply tokens. Version-controlled alongside tokens.",
+    "color": {
+      "brand": {
+        "primary_purple": "Brand purple (#8E42EE) is the primary interactive color. Use for: primary buttons, active tab indicators, badge fills, interactive link text, logo text, and greeting text. Never use as body text color or as a large-area background.",
+        "primary_orange": "Brand orange is a secondary brand accent. Use sparingly to emphasize or highlight — e.g. a single callout element or CTA highlight per view. Never compete with purple as the dominant brand color on any screen.",
+        "non_brand_accents": "Cyan, pink, and blue are non-brand highlight/accent colors permitted for tags, chips, and data labels only. They must never appear in Elucidata or Polly brand-attributed UI (headers, logos, nav, primary CTAs). They will never be the most prominent color on a page.",
+        "status_colors": {
+          "yellow": "Use for alert or attention states only.",
+          "red": "Use for high-alert, error, and destructive states only.",
+          "green": "Use for positive and success states only.",
+          "blue": "May be used for positive or neutral informational states — lower urgency than green. Acceptable for informational banners, neutral status chips."
+        }
+      },
+      "surface": {
+        "sidebar_bg": "Sidebar background is always #211D33. No substitution permitted.",
+        "sidebar_nested": "#2C2840 is the only permitted background for nested panels or flyouts within the sidebar layer.",
+        "sidebar_stroke": "#433B60 is used exclusively for dividers, borders, and separators inside the dark sidebar. Do not use in the main content area.",
+        "platform_surface": "The main platform surface background is the defined gradient (core.color.platform.surface). Never replace with a flat color.",
+        "card_bg": "White (#FFFFFF) is the required background for all cards, tables, modals, and data containers on top of the platform surface. No other fill is permitted."
+      },
+      "text": {
+        "interactive_links": "Purple (#8E42EE) is the only color for inline interactive/clickable text. Do not use blue, underline-only, or any other convention.",
+        "informational_count": "Informational count text (e.g. 'Showing 3,501 Datasets') uses the primary purple at reduced visual weight — not black or gray.",
+        "muted_supporting": "Subtitles, descriptions, and placeholders must use a neutral token. Never use brand purple or pure black for muted text."
+      },
+      "badges": {
+        "brand_badge": "Status badges tied to Polly/Elucidata context (e.g. 'User Data') use #8E42EE fill with white text.",
+        "new_badge_rule": "New badge types must be defined as a semantic token before use. No ad hoc badge colors are permitted."
+      }
+    },
+    "typography": {
+      "font_families": {
+        "inter": "Default font for all UI text.",
+        "space_grotesk": "Restricted to display-level headings only (Display, Headline, Slate scale). Not for body, labels, or components.",
+        "jetbrains_mono": "Strictly for code blocks, CLI output, and monospaced data display.",
+        "mixing_rule": "Never mix Inter and Space Grotesk within the same text element or component. Font family switching only occurs at a layout-section boundary."
+      },
+      "scale_rules": {
+        "page_titles": "Page titles use Headline or Title/Large scale. Must not exceed the defined headline steps.",
+        "body_text": "Body copy and card descriptions use Body/Medium or Body/Small. Truncated text uses ellipsis — never scale down the font size.",
+        "badge_tag_text": "Badge/tag text uses Label or Tag scale only. Never Body scale. Minimum size is the Micro step.",
+        "table_headers": "Column headers use Label/Small or Tag scale at SemiBold (600) weight. Not uppercase by default unless defined in the table component token.",
+        "sidebar_nav_labels": "Navigation labels in the sidebar use Label or Body/Small at Medium (500) weight. Active state does not change font size or weight — only color and the active indicator change.",
+        "section_labels": "Section labels (e.g. 'All User Atlases') use Body/Small or Label at SemiBold (600). Do not use the Headline scale for section labels."
+      }
+    },
+    "layout": {
+      "page_structure": "All pages use a fixed-width left sidebar plus a scrollable main content area. Sidebar does not collapse to icons on desktop.",
+      "platform_surface_scope": "The platform surface gradient is the background of the main content area. All sections and components sit on white cards on top of it.",
+      "cards": "Cards always use xl border radius and md elevation. Flat/borderless cards are not permitted outside of explicitly defined flat card variants.",
+      "global_header": "The global header sits above content with no elevation. It is separated from content by spacing only — no shadow.",
+      "tables": "Tables are always wrapped in a white container with rounded corners and md elevation. The table itself carries no background fill.",
+      "search_bar_placement": "Search bars inside the global header are centered and fill available space between the nav title and action buttons. They never span the full content width."
+    },
+    "components": {
+      "buttons": {
+        "primary": "One primary button per screen. Use for the main action only.",
+        "secondary": "Secondary actions (e.g. 'Request a Dataset') use the Secondary/Outlined variant with a purple border. Never use a filled secondary color.",
+        "icon_button": "Icon-only action buttons (filter, view toggle, etc.) use the icon button variant with no visible border in default state."
+      },
+      "tabs": "Tabs use a bottom-border indicator in #8E42EE for the active state. Inactive tabs have no underline and use neutral text. Filled or pill-style tabs are not permitted in the main nav context.",
+      "table_sort": "Sort controls in table headers show the sort icon alongside the label at all times — not only on hover.",
+      "pagination": "Pagination uses the minimal numeric style with previous/next arrows. Always display the total dataset count alongside (e.g. 'Showing 1–25 of 345').",
+      "sidebar_active_state": "Active sidebar nav item is indicated by a left-side purple pill/accent bar only. No background fill, icon color change, or text weight change. This is the only permitted active state pattern for sidebar nav.",
+      "notification_badges": "Notification badges on sidebar icons use the red semantic color token. Small, circular, positioned top-right of the icon."
+    },
+    "spacing": {
+      "card_padding": "Internal card padding uses spacing.4 (1rem) on all sides.",
+      "card_grid_gap": "Gap between cards in a grid layout uses spacing.4 (1rem).",
+      "table_rows": "Table row height must not be set as a raw pixel value. Derive from label/body font size plus defined padding tokens."
     }
   }
 }
